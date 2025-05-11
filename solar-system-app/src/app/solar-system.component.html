@@ -1,0 +1,23 @@
+<div class="solar-system-info">
+  <h2>Solar System Planets</h2>
+  
+  <div class="planet-names">
+    <h3>Planet Names</h3>
+    <ul>
+      <li *ngFor="let index of [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+        Planet {{ index }}: {{ planetsHelper.getPlanetName(index) }}
+      </li>
+    </ul>
+  </div>
+  
+  <div class="planet-checks">
+    <h3>Planet Existence Check</h3>
+    <p>Is 'Earth' a solar system planet? {{ planetsHelper.isSolarSystemPlanet('Earth') }}</p>
+    <p>Is 'Andromeda' a solar system planet? {{ planetsHelper.isSolarSystemPlanet('Andromeda') }}</p>
+  </div>
+  
+  <div class="probes-cost">
+    <h3>Solar System Probes Cost</h3>
+    <p>Total Probes Cost: ${{ getSolarSystemProbesCost() }}</p>
+  </div>
+</div>
