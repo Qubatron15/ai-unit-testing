@@ -28,48 +28,7 @@ class MockSolarSystemDetails {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './solar-system.component.html',
-  styles: [`
-    .solar-system-info {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f4f4f4;
-      border-radius: 8px;
-    }
-    
-    h2 {
-      color: #333;
-      text-align: center;
-      border-bottom: 2px solid #007bff;
-      padding-bottom: 10px;
-    }
-    
-    .planet-names, .planet-checks, .probes-cost {
-      background-color: white;
-      margin: 15px 0;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    h3 {
-      color: #007bff;
-      margin-bottom: 10px;
-    }
-    
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    
-    li {
-      margin: 5px 0;
-      padding: 5px;
-      background-color: #f9f9f9;
-      border-radius: 3px;
-    }
-  `]
+  styleUrl: './solar-system.component.scss'
 })
 export class SolarSystemComponent implements OnInit {
   planetsHelper: SolarSystemPlanetsHelper;
