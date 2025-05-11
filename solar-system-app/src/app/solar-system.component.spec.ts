@@ -107,4 +107,69 @@ describe('SolarSystemComponent', () => {
       expect(component.getSolarSystemProbesCost()).toBe(200);
     });
   });
+
+  describe('Component Template', () => {
+    beforeEach(() => {
+      // Setup mock service with predictable data
+      mockSolarSystemDetailsService.getSolarSystemPlanetsDetails.mockReturnValue([
+        {
+          probes: () => [
+            { isCostKnown: () => true, getCost: () => 100 },
+            { isCostKnown: () => true, getCost: () => 200 }
+          ],
+          moonList: () => [
+            {
+              probes: () => [
+                { isCostKnown: () => true, getCost: () => 50 }
+              ]
+            }
+          ]
+        }
+      ]);
+
+      // Trigger change detection
+      fixture.detectChanges();
+    });
+
+    it('should render planet names correctly', () => {
+      const planetNameElements = fixture.nativeElement.querySelectorAll('.planet-names li');
+      expect(planetNameElements.length).toBe(9);
+      
+      const expectedPlanets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto'];
+      planetNameElements.forEach((element: HTMLElement, index: number) => {
+        expect(element.textContent?.trim()).toBe(`Planet ${index}: ${expectedPlanets[index]}`);
+      });
+    });
+
+    it('should render planet existence checks', () => {
+      const planetChecks = fixture.nativeElement.querySelectorAll('.planet-checks p');
+      
+      expect(planetChecks.length).toBe(2);
+      expect(planetChecks[0].textContent?.trim()).toContain('Is \'Earth\' a solar system planet? true');
+      expect(planetChecks[1].textContent?.trim()).toContain('Is \'Andromeda\' a solar system planet? false');
+    });
+
+    it('should render solar system probes cost', () => {
+      const probesCostElement = fixture.nativeElement.querySelector('.probes-cost p');
+      
+      expect(probesCostElement).toBeTruthy();
+      expect(probesCostElement.textContent?.trim()).toBe('Total Probes Cost: $350');
+    });
+
+    it('should have correct CSS classes', () => {
+      const rootElement = fixture.nativeElement.querySelector('.solar-system-info');
+      expect(rootElement).toBeTruthy();
+
+      const sections = [
+        '.planet-names',
+        '.planet-checks',
+        '.probes-cost'
+      ];
+
+      sections.forEach(selector => {
+        const section = fixture.nativeElement.querySelector(selector);
+        expect(section).toBeTruthy();
+      });
+    });
+  });
 });
